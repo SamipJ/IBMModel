@@ -89,3 +89,4 @@ ENV/
 .ropeproject
 
 parallel_corpus_IR2/
+writetest.txt
