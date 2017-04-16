@@ -31,6 +31,7 @@ def buildCorpus(englishFile,frenchFile):
 		for fletter in fline:
 			if(fletter!='"'  and fletter!="," and fletter!="."):	#and fletter!="'"
 				fline1+=fletter
+		fline1+=' '
 
 		line1 = line1.lower()
 		fline1 = fline1.lower()
@@ -122,7 +123,7 @@ def main():
  #                  ("the new  book", "das Buch"),
  #                  ("a new shiny book", "ein Buch")]
 	# query = ["buch","haus"]
-	sent_pairs = buildCorpus('parallel_corpus_IR2/english.txt','parallel_corpus_IR2/french.txt')	#change filenames
+	sent_pairs = buildCorpus('parallel_corpus_IR2/eng.txt','parallel_corpus_IR2/fre.txt')	#change filenames
 	# sent_pairs = buildCorpus('e1.txt','f1.txt')
 	f_to_e = fre_to_eng(sent_pairs)
 	# e_to_f = eng_to_fre(sent_pairs)
