@@ -1,0 +1,71 @@
+Information Retrieval Assignment-2 Design Document
+
+#DATASET: 
+Two parallel corpora -one of English text and its French translation- provided as part of the assignment statement.
+
+
+#LIBRARIES:
+-'re' for regular expressions,
+-'collections' for enhanced dictionary functions,
+-'copy' for checking for convergence during iterations of IBM Model 1,
+-'math' for mathematical functionals,
+-'json' for backing up index in secondary memory,
+-'io' for file I/O,
+-'sys' for setting up default encoding,
+-'time' for measuring execution time.
+
+#OPTIMISATION:
+-Limiting number of iterations in Expectation Maximization step in case of slow convergence to save on execution time
+-Preventing underflow of conditional probability values at 10^-5 to limit needless floating point computation
+-Usage of Python collections instead of 'dict' datatype to provide faster access and dynamic initialization
+-Saving entire mapping in secondary memory to remove needless building every time by using json
+-Exponential Decay function (alpha = 0.9) used to weigh alignment to increase accuracy
+
+#PREPROCESSING
+-‘latin-1’ encoding scheme to handle both French and English character symbols
+-Custom tokenizer created to handle special French characters
+-All words converted to lowercase to prevent duplicates in dictionary
+
+#TRANSLATION
+-A word map of maximum probabilities of word generation from English to French and vice versa was built using conditional probabilities
+-If maximum probabilities of word generation are within a certain threshold then all of them are considered and the answer is a concatenation of each of them
+-The word map created is backed up as json files to avoid unnecessary processing for future queries
+
+#MODEL: 
+IBM Model 1 - The statistical machine translation model that has been implemented is the IBM Model 1, with further additions. This model has
+formed the basis for almost all SMT models that followed, including many that are currently being used in industry. 
+
+IBM Model 1 is solely based on lexical translation. The two parameters to the problem are:
+a)The word generation probability, i.e. the probability of generating a word in one language given a word in another language
+b)The alignment function, i.e. which words in one sentence map to which words in the sentence's translation in another language
+
+The choice for implementing Model 1 was made purely on the basis of computational power available. The corpus size and the amount of calculation
+required would be impractical to execute on a personal computer. Still, features of Model 2 have been incorporated in a weaker sense.
+
+In IBM Model 1, the probability distribution of the alignment function is considered to be uniform. IBM Model 2, however, considers the alignment
+of the sentence as well to calculate the most likely translation of a sentence. This feature of Model 2 has been mimicked in our implementation as
+an exponential decay function, which penalizes sentences with more reordering.
+
+
+#Jaccard Coefficient:
+Jaccard Coefficient is a measure of similarity between two sample sets. It is the ratio of the cardinality of the intersection to the cardinality
+of the union of the two sets. For two text documents, the Jaccard Coefficient is calculated as the number of common words/tokens divided by the 
+total size of the vocabulary. In the implementation, the processed query's tokens are saved in a set -one for each query document- and Python's 
+inbuilt union and intersection functions are used to calculate the Coefficient.
+
+#Cosine Similarity:
+Cosine Similarity is a measure of the similarity between two documents which also implements length normalization. Each document is represented
+as a vector, where its dimensions are all the words in the vocabulary, and the values are the term frequencies of the respective words. The
+Cosine similarity is calculated as the ratio of the dot product of the two vectors divided by the products of the magnitudes of the two vectors,
+thus implementing document length normalization. In the implementation, the input documents are represented as key-value pairs in a python
+dictionary, where the keys are the words in the document, and the values are the corresponding word's term frequency. The magnitudes of the two
+vectors and the dot product of them are calculated and using them so is the cosine similarity.
+
+
+
+Team Members:
+-Aadi Jain (2015A7PS104P)
+-Ayushmaan Jain (2015A7PS043P)
+-Aradhya Khandelwal (2015A7PS036P)
+-Samip Jasani (2015A7PS127P)
+-Tanvi Aggarwal (2015A7PS140P)
