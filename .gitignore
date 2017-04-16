@@ -92,4 +92,3 @@ parallel_corpus_IR2/
 writetest.txt
 translation.txt
 *.json
-*.txt
