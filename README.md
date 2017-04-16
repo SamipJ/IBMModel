@@ -4,7 +4,7 @@ An implementation of text translation using statistical machine translation i.e.
 code available online at:https://github.com/SamipJ/SMT-using-IBMModel1.5
 
 
-# FEATURES
+## FEATURES
 * Seperate word mapping made and preserved for English to French and French to English
 * Expectation maximization step iterated till conditional probabilties converge or 1000 iterations whichever is less
 * Mapping from one word to multiple word also considered when probabilties of multiple word for translation is high and similar
