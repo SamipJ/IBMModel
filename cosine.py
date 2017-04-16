@@ -1,5 +1,5 @@
 import re						#for regular expressions
-import math						#for square root			
+import math						#for square root
 
 def computeCosine(doc1,doc2):				#takes two documents as argument and prints the cosine similarity between them
     with open(doc1, 'r') as myfile:
@@ -15,7 +15,7 @@ def computeCosine(doc1,doc2):				#takes two documents as argument and prints the
             dict1[word] = 1
 
 
-    with open(doc2, 'r') as myfile:			
+    with open(doc2, 'r') as myfile:
         phrase=myfile.read().replace('\n',' ')
     list2 = re.findall('\w+', phrase)
     list2 = [element.lower() for element in list2]	#list2 contains all tokens from doc2 in lowercase form
@@ -46,7 +46,7 @@ def computeCosine(doc1,doc2):				#takes two documents as argument and prints the
 
     cosine = prod/(magnitude1 * magnitude2)		#cosine similarity of doc1 and doc2
 
-    print cosine
+    return cosine
 def main():						#main function
     computeCosine("words1.txt","words2.txt")
 

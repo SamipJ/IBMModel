@@ -189,49 +189,38 @@ def translate(qs, mp):
 	return str
 
 #start program execution
-def run():
-	with io.open('map_fe.json','r') as fp:
-		f_to_e_s = fp.read()
-		f_to_e = json.loads(f_to_e_s)
-	with io.open('map_ef.json','r') as fp:
-		e_to_f_s = fp.read()
-		e_to_f = json.loads(e_to_f_s)
-	print len(f_to_e), ", ", len(e_to_f)
-	transFile = open('translation.txt','w+')		#declare translated_filename='translation.txt' in driver
-	num_query = int(raw_input("Enter the number of query files: "))
-	for i in range(0,num_query):
-		query_lang=str(raw_input("Enter language of query file (source) <enter 'e' for english, 'f' for french>: "))
-		query_lang=query_lang.lower()
-		if(query_lang!='e' and query_lang!='f'):
-			print("Invalid Input")
-			continue
-		query_file=str(raw_input("Enter the query file name: "))
-		qs = process_query(query_file,query_lang)
-		for q in qs:
-			q_tokens=unicode(q).split()
-			if(query_lang=='e'):
-				translated=translate(q_tokens,e_to_f)
-			elif query_lang=='f':
-				translated=translate(q_tokens,f_to_e)
-			else:
-				print("Invalid Input")
-				translated=""
-			print translated
-			transFile.write(translated)
-	transFile.close()
+def run(transFile,query,query_lang):
+	if query_lang=='f':
+		with io.open('map_fe.json','r') as fp:
+			f_to_e_s = fp.read()
+			f_to_e = json.loads(f_to_e_s)
+	else:
+		with io.open('map_ef.json','r') as fp:
+			e_to_f_s = fp.read()
+			e_to_f = json.loads(e_to_f_s)
+	qs = process_query(query,query_lang)
+	for q in qs:
+		q_tokens=unicode(q).split()
+		if(query_lang=='e'):
+			translated=translate(q_tokens,e_to_f)
+		elif query_lang=='f':
+			translated=translate(q_tokens,f_to_e)
+		print translated
+		transFile.write(translated)
+
 	# call Jaccard Coefficient and Cosine similarity
-	corTrans_filename = str(raw_input("Enter the filename of the correct translation: "))
+
 	#pass corTrans_filename and translated_filename='translation.txt' as parameters
 
 
 #rebuilds the french->english and english->french word maps using the corpus
-def rebuild():
+def rebuild(english,french):
 	# sent_pairs = [("the house", "Haus das"),
 					# ("the book", "das Buch"),
 					# ("a book", "ein Buch")]
 	# queryf = ["Buch","Haus"]
 	# sent_pairs = buildCorpus('english.txt','french.txt')
-	sent_pairs = buildCorpus('readenglish.txt','readfrench.txt')
+	sent_pairs = buildCorpus(english,french)
 	f_to_e = fre_to_eng(sent_pairs)
 	e_to_f = eng_to_fre(sent_pairs)
 	print len(f_to_e), ", ", len(e_to_f)
