@@ -1,5 +1,5 @@
 # CROSS LINGUAL DOCUMENT TRANSLATOR
-An implementation of text translation using statistical machine translation i.e. IBM Model 1 with alignment heuristics. We have used to text files one in french and one in english to make parallel corpus.
+An implementation of text translation using statistical machine translation i.e. IBM Model 1 with alignment heuristics. We have used two text files - one in french and one in english - to make parallel corpus.
 
 code available online at:https://github.com/SamipJ/SMT-using-IBMModel1.5
 
